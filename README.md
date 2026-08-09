@@ -28,6 +28,7 @@ contributions. Fork it if you want to adapt it for your own workflow.
 - Neovim 0.12 or newer
 - [GitHub CLI](https://cli.github.com/)
 - [DASH](https://github.com/dlvhdr/gh-dash)
+- [Herdr](https://herdr.dev/)
 - [XcodeProjectCLI](https://github.com/wojciech-kulik/XcodeProjectCLI)
 - [xcode-build-server](https://github.com/SolaWing/xcode-build-server)
 - [pymobiledevice3](https://github.com/doronz88/pymobiledevice3) for physical-device workflows
@@ -42,7 +43,7 @@ The included installer handles the Homebrew and `pipx` dependencies. To install
 them manually instead:
 
 ```bash
-brew install neovim gh xcp xcode-build-server xcbeautify swiftformat swiftlint lazygit git-delta tuicr \
+brew install neovim gh xcp xcode-build-server xcbeautify swiftformat swiftlint lazygit git-delta tuicr herdr \
   pipx ripgrep fd jq coreutils
 gh extension install dlvhdr/gh-dash
 pipx install pymobiledevice3
@@ -69,7 +70,7 @@ The installer:
 - installs `gh-dash` as a GitHub CLI extension when it is missing
 - installs `pymobiledevice3` with `pipx` when it is missing
 - safely backs up existing configuration paths before replacing them
-- links Neovim, LazyGit, TUICR, and `gh-dash` to their tracked configurations
+- links Neovim, LazyGit, TUICR, `gh-dash`, and Herdr to their tracked configurations
 - installs the pinned Neovim plugins
 
 GitHub authentication is interactive, so it remains an explicit step after the
@@ -99,6 +100,7 @@ git -C ~/Developer/personal-development-environment pull --ff-only
 │   └── after/
 └── configs/
     ├── gh-dash/
+    ├── herdr/
     ├── lazygit/
     └── tuicr/
 ```
@@ -114,10 +116,12 @@ The installer manages these paths:
 - LazyGit's platform-specific `config.yml` → `configs/lazygit/config.yml`
 - `~/.config/tuicr/config.toml` → `configs/tuicr/config.toml`
 - `~/.config/gh-dash/config.yml` → `configs/gh-dash/config.yml`
+- `~/.config/herdr/config.toml` → `configs/herdr/config.toml`
 
 ## Standalone Tools
 
 - `gh dash` opens the GitHub dashboard.
+- `herdr` opens the agent-aware terminal multiplexer. Its prefix is `Ctrl-s`.
 - `lazygit` opens the Git interface with Delta-powered diff rendering.
 - `tuicr --working-tree` reviews uncommitted changes.
 

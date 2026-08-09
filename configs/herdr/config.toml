@@ -1,0 +1,5 @@
+# https://herdr.dev/docs/configuration/
+onboarding = false
+
+[keys]
+prefix = "ctrl+s"
