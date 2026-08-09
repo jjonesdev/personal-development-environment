@@ -56,8 +56,9 @@ will work, but icon alignment and text weight may differ.
 Clone the repository into your development directory and run the installer:
 
 ```bash
-git clone https://github.com/jjonesdev/nvim.git ~/Developer/nvim
-cd ~/Developer/nvim
+git clone https://github.com/jjonesdev/personal-development-environment.git \
+  ~/Developer/personal-development-environment
+cd ~/Developer/personal-development-environment
 ./install.sh
 gh auth status || gh auth login
 ```
@@ -81,8 +82,8 @@ configuration is required.
 To update the configuration later:
 
 ```bash
-git -C ~/Developer/nvim pull --ff-only
-~/Developer/nvim/install.sh
+git -C ~/Developer/personal-development-environment pull --ff-only
+~/Developer/personal-development-environment/install.sh
 ```
 
 ## Repository Layout
