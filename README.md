@@ -1,8 +1,8 @@
-# Neovim Configuration
+# Development Environment
 
-This is a personal Neovim configuration for day-to-day iOS and macOS
-development. It tracks the editor, tools, mappings, and visual choices I use—not
-a starter kit or general-purpose Neovim distribution.
+This is a personal macOS development environment centered on Neovim and iOS
+development. It tracks the editor, command-line tools, mappings, and visual
+choices I use—not a starter kit or general-purpose Neovim distribution.
 
 It was originally inspired by
 [wojciech-kulik/ios-dev-starter-nvim](https://github.com/wojciech-kulik/ios-dev-starter-nvim)
@@ -11,7 +11,8 @@ Neovim](https://wojciechkulik.pl/ios/the-complete-guide-to-ios-macos-development
 
 The setup includes Xcode project workflows, SourceKit-LSP, simulator builds and
 runs, LLDB debugging, tests, diagnostics, formatting, linting, code coverage,
-Git review tools, and an Xcode Dark High Contrast-inspired interface.
+Git review tools, a GitHub dashboard, and an Xcode Dark High Contrast-inspired
+Neovim interface.
 
 The repository is public as a reference, but I do not accept external
 contributions. Fork it if you want to adapt it for your own workflow.
@@ -19,8 +20,14 @@ contributions. Fork it if you want to adapt it for your own workflow.
 ## Requirements
 
 - macOS with Xcode 26 or Xcode 27
-- Neovim 0.12 or newer
+- [Homebrew](https://brew.sh/)
 - A terminal with true-color and Nerd Font support
+
+## Installed Tools
+
+- Neovim 0.12 or newer
+- [GitHub CLI](https://cli.github.com/)
+- [DASH](https://github.com/dlvhdr/gh-dash)
 - [XcodeProjectCLI](https://github.com/wojciech-kulik/XcodeProjectCLI)
 - [xcode-build-server](https://github.com/SolaWing/xcode-build-server)
 - [pymobiledevice3](https://github.com/doronz88/pymobiledevice3) for physical-device workflows
@@ -35,8 +42,9 @@ The included installer handles the Homebrew and `pipx` dependencies. To install
 them manually instead:
 
 ```bash
-brew install neovim xcp xcode-build-server xcbeautify swiftformat swiftlint lazygit git-delta tuicr \
+brew install neovim gh xcp xcode-build-server xcbeautify swiftformat swiftlint lazygit git-delta tuicr \
   pipx ripgrep fd jq coreutils
+gh extension install dlvhdr/gh-dash
 pipx install pymobiledevice3
 ```
 
@@ -51,18 +59,23 @@ Clone the repository into your development directory and run the installer:
 git clone https://github.com/jjonesdev/nvim.git ~/Developer/nvim
 cd ~/Developer/nvim
 ./install.sh
+gh auth status || gh auth login
 ```
 
 The installer:
 
 - installs missing formulae from `Brewfile` without upgrading existing ones
+- installs `gh-dash` as a GitHub CLI extension when it is missing
 - installs `pymobiledevice3` with `pipx` when it is missing
-- safely backs up an existing `~/.config/nvim`
-- links `~/.config/nvim` to the cloned repository
+- safely backs up existing configuration paths before replacing them
+- links Neovim, LazyGit, TUICR, and `gh-dash` to their tracked configurations
 - installs the pinned Neovim plugins
 
+GitHub authentication is interactive, so it remains an explicit step after the
+installer. Skip `gh auth login` when `gh auth status` already succeeds.
+
 It is safe to rerun after updating the repository. The custom `xcode-dark-hc`
-colorscheme is already selected in `init.lua`, so no additional theme
+colorscheme is already selected in `nvim/init.lua`, so no additional theme
 configuration is required.
 
 To update the configuration later:
@@ -71,6 +84,44 @@ To update the configuration later:
 git -C ~/Developer/nvim pull --ff-only
 ~/Developer/nvim/install.sh
 ```
+
+## Repository Layout
+
+```text
+.
+├── Brewfile
+├── install.sh
+├── nvim/
+│   ├── init.lua
+│   ├── lua/
+│   ├── colors/
+│   └── after/
+└── configs/
+    ├── gh-dash/
+    ├── lazygit/
+    └── tuicr/
+```
+
+The boundaries are intentional: `nvim/` contains editor behavior, `configs/`
+contains settings for standalone tools, and `install.sh` owns package
+installation, backups, and symlinks. Neovim can launch LazyGit and TUICR
+without owning their configuration.
+
+The installer manages these paths:
+
+- `~/.config/nvim` → `nvim/`
+- LazyGit's platform-specific `config.yml` → `configs/lazygit/config.yml`
+- `~/.config/tuicr/config.toml` → `configs/tuicr/config.toml`
+- `~/.config/gh-dash/config.yml` → `configs/gh-dash/config.yml`
+
+## Standalone Tools
+
+- `gh dash` opens the GitHub dashboard.
+- `lazygit` opens the Git interface with Delta-powered diff rendering.
+- `tuicr --working-tree` reviews uncommitted changes.
+
+LazyGit and TUICR remain available from Neovim through `<leader>gg` and
+`<leader>gr`, respectively.
 
 ## Xcode Selection
 

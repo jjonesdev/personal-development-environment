@@ -1,6 +1,6 @@
 # Contributions
 
-This repository tracks a personal Neovim configuration and does not accept
+This repository tracks a personal development environment and does not accept
 external contributions.
 
 If you want to change or extend the configuration, please fork the repository
