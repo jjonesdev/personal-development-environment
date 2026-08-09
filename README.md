@@ -1,8 +1,13 @@
-# Jordan's Neovim Configuration
+# Neovim Configuration
 
-This is my personal Neovim configuration for day-to-day iOS and macOS
+This is a personal Neovim configuration for day-to-day iOS and macOS
 development. It tracks the editor, tools, mappings, and visual choices I use—not
 a starter kit or general-purpose Neovim distribution.
+
+It was originally inspired by
+[wojciech-kulik/ios-dev-starter-nvim](https://github.com/wojciech-kulik/ios-dev-starter-nvim)
+and [The Complete Guide to iOS & macOS Development in
+Neovim](https://wojciechkulik.pl/ios/the-complete-guide-to-ios-macos-development-in-neovim).
 
 The setup includes Xcode project workflows, SourceKit-LSP, simulator builds and
 runs, LLDB debugging, tests, diagnostics, formatting, linting, code coverage,
