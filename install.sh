@@ -61,6 +61,10 @@ link_config "${nvim_dir}" "${config_root}/nvim"
 link_config "${repo_dir}/configs/lazygit/config.yml" "${lazygit_config_dir}/config.yml"
 link_config "${repo_dir}/configs/tuicr/config.toml" "${config_root}/tuicr/config.toml"
 link_config "${repo_dir}/configs/gh-dash/config.yml" "${config_root}/gh-dash/config.yml"
+link_config "${repo_dir}/configs/herdr/config.toml" "${config_root}/herdr/config.toml"
+
+echo "Starting the Herdr background service..."
+brew services start herdr
 
 echo "Installing Neovim plugins..."
 nvim --headless "+Lazy! sync" +qa
