@@ -1,4 +1,5 @@
 brew "neovim"
+brew "gh"
 brew "xcp"
 brew "xcode-build-server"
 brew "xcbeautify"

@@ -1,0 +1,3 @@
+# https://www.gh-dash.dev/configuration
+pager:
+  diff: delta
