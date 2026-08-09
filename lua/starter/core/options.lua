@@ -27,6 +27,7 @@ opt.smartcase = true -- if you include mixed case in your search, assumes you wa
 opt.cursorline = true -- highlight the current cursor line
 
 -- appearance
+opt.cmdheight = 0 -- show the command line only while it is in use
 
 -- true-color terminal support
 -- (have to use iterm2 or any other true color terminal)
