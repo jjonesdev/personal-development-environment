@@ -1,0 +1,5 @@
+git:
+  diffRenderers:
+    - name: delta
+      colorArg: always
+      command: delta --dark --paging=never
