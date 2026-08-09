@@ -15,7 +15,9 @@ opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 
 -- line wrapping
-opt.wrap = false -- enable line wrapping
+opt.wrap = true -- wrap long lines to the width of the current window
+opt.linebreak = true -- wrap at sensible character boundaries when possible
+opt.breakindent = true -- preserve indentation on wrapped screen lines
 
 -- search settings
 opt.ignorecase = true -- ignore case when searching
@@ -44,3 +46,27 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- Give command entry the bottom row by temporarily hiding the global statusline.
+local command_line_status = vim.api.nvim_create_augroup("command-line-status", { clear = true })
+local previous_laststatus
+
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+  group = command_line_status,
+  pattern = ":",
+  callback = function()
+    previous_laststatus = vim.o.laststatus
+    vim.o.laststatus = 0
+  end,
+})
+
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+  group = command_line_status,
+  pattern = ":",
+  callback = function()
+    if previous_laststatus ~= nil then
+      vim.o.laststatus = previous_laststatus
+      previous_laststatus = nil
+    end
+  end,
+})
