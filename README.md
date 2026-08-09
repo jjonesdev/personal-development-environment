@@ -47,6 +47,7 @@ brew install neovim gh xcp xcode-build-server xcbeautify swiftformat swiftlint l
   pipx ripgrep fd jq coreutils
 gh extension install dlvhdr/gh-dash
 pipx install pymobiledevice3
+brew services start herdr
 ```
 
 The interface was designed with **Lilex Nerd Font Mono Medium**. Any Nerd Font
@@ -71,6 +72,7 @@ The installer:
 - installs `pymobiledevice3` with `pipx` when it is missing
 - safely backs up existing configuration paths before replacing them
 - links Neovim, LazyGit, TUICR, `gh-dash`, and Herdr to their tracked configurations
+- starts the Herdr session server at login through Homebrew services
 - installs the pinned Neovim plugins
 
 GitHub authentication is interactive, so it remains an explicit step after the
@@ -121,7 +123,8 @@ The installer manages these paths:
 ## Standalone Tools
 
 - `gh dash` opens the GitHub dashboard.
-- `herdr` opens the agent-aware terminal multiplexer. Its prefix is `Ctrl-s`.
+- `herdr` attaches to the agent-aware terminal multiplexer. Its prefix is
+  `Ctrl-s`, and its session server starts automatically at login.
 - `lazygit` opens the Git interface with Delta-powered diff rendering.
 - `tuicr --working-tree` reviews uncommitted changes.
 
