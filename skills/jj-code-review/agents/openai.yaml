@@ -1,0 +1,6 @@
+interface:
+  display_name: "JJ Code Review"
+  short_description: "High-signal code review with optional profiles"
+  default_prompt: "Use $jj-code-review to review the current changes for actionable defects."
+policy:
+  allow_implicit_invocation: false
