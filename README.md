@@ -30,6 +30,7 @@ contributions. Fork it if you want to adapt it for your own workflow.
 - [DASH](https://github.com/dlvhdr/gh-dash)
 - [Herdr](https://herdr.dev/)
 - [XcodeProjectCLI](https://github.com/wojciech-kulik/XcodeProjectCLI)
+- [XcodeBuildMCP](https://github.com/getsentry/XcodeBuildMCP) for agent-driven builds, tests, debugging, logs, and simulator automation
 - [xcode-build-server](https://github.com/SolaWing/xcode-build-server)
 - [pymobiledevice3](https://github.com/doronz88/pymobiledevice3) for physical-device workflows
 - [SwiftLint](https://github.com/realm/SwiftLint)
@@ -43,7 +44,9 @@ The included installer handles the Homebrew and `pipx` dependencies. To install
 them manually instead:
 
 ```bash
-brew install neovim gh xcp xcode-build-server xcbeautify swiftformat swiftlint lazygit git-delta tuicr herdr \
+brew tap getsentry/xcodebuildmcp
+brew trust --formula getsentry/xcodebuildmcp/xcodebuildmcp
+brew install neovim gh xcp xcode-build-server xcodebuildmcp xcbeautify swiftformat swiftlint lazygit git-delta tuicr herdr \
   pipx ripgrep fd jq coreutils
 gh extension install dlvhdr/gh-dash
 pipx install pymobiledevice3
@@ -68,11 +71,13 @@ gh auth status || gh auth login
 The installer:
 
 - installs missing formulae from `Brewfile` without upgrading existing ones
+- trusts only the official XcodeBuildMCP formula from its third-party Homebrew tap
 - installs `gh-dash` as a GitHub CLI extension when it is missing
 - installs `pymobiledevice3` with `pipx` when it is missing
 - safely backs up existing configuration paths before replacing them
 - links Neovim, LazyGit, TUICR, `gh-dash`, and Herdr to their tracked configurations
 - links shared agent skills into the personal Codex and Claude Code skill directories
+- registers XcodeBuildMCP with Codex and Claude Code when it is missing
 - starts the Herdr session server at login through Homebrew services
 - installs the pinned Neovim plugins
 
@@ -97,6 +102,7 @@ git -C ~/Developer/personal-development-environment pull --ff-only
 ├── Brewfile
 ├── install.sh
 ├── scripts/
+│   ├── update-mcps.sh
 │   └── update-skills.sh
 ├── skills/
 │   └── <skill-name>/
@@ -127,6 +133,28 @@ The installer manages these paths:
 - `~/.config/herdr/config.toml` → `configs/herdr/config.toml`
 - `~/.agents/skills/<skill-name>` → `skills/<skill-name>` for Codex
 - `${CLAUDE_CONFIG_DIR:-~/.claude}/skills/<skill-name>` → `skills/<skill-name>` for Claude Code
+
+## Agent MCP Servers
+
+XcodeBuildMCP gives Codex and Claude Code access to iOS build, test, simulator,
+debugging, logging, and UI-automation workflows. The same Homebrew package also
+provides the `xcodebuildmcp` CLI for direct terminal use.
+
+The installer registers this stdio server when it is missing:
+
+```text
+XcodeBuildMCP -> xcodebuildmcp mcp
+  workflows -> simulator, debugging, ui-automation
+```
+
+Registration is additive. `scripts/update-mcps.sh` checks each client before
+adding the server and leaves an existing same-named configuration unchanged.
+It does not replace either client's configuration file. Run it directly after
+installing Codex or Claude Code on an existing PDE installation:
+
+```bash
+./scripts/update-mcps.sh
+```
 
 ## Agent Skills
 
@@ -162,6 +190,11 @@ Git. To use a local-only skill from the same directory, exclude it locally:
 ```bash
 printf 'skills/work-only/\n' >> .git/info/exclude
 ```
+
+The included iOS skill bundle comes from
+[`junwatu/codex-plugins`](https://github.com/junwatu/codex-plugins/tree/main/plugins/build-ios-apps).
+Its debugger skill uses XcodeBuildMCP, while its SwiftUI skills cover Liquid
+Glass, performance auditing, UI patterns, and view refactoring.
 
 ## Standalone Tools
 

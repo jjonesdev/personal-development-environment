@@ -24,3 +24,18 @@ and skipped.
 This repository is public. Do not commit work-specific instructions, secrets,
 or proprietary reference material. A local-only skill can live here without
 being committed if its directory is added to `.git/info/exclude`.
+
+## Upstream Skills
+
+The following skills are sourced from the
+[`build-ios-apps`](https://github.com/junwatu/codex-plugins/tree/main/plugins/build-ios-apps)
+plugin at commit `c33798c8a1e6da61a75e06e33ceae39a35f05ea5`:
+
+- `ios-debugger-agent`
+- `swiftui-liquid-glass`
+- `swiftui-performance-audit`
+- `swiftui-ui-patterns`
+- `swiftui-view-refactor`
+
+Their internal references are retained. `ios-debugger-agent` is updated for the
+current XcodeBuildMCP v2 tool names and automatic runtime-log capture behavior.

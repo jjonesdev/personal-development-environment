@@ -1,3 +1,5 @@
+tap "getsentry/xcodebuildmcp"
+
 brew "neovim"
 brew "gh"
 brew "xcp"
@@ -14,3 +16,4 @@ brew "ripgrep"
 brew "fd"
 brew "jq"
 brew "coreutils"
+brew "xcodebuildmcp"

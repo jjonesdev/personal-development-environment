@@ -38,6 +38,10 @@ if ! xcode-select -p >/dev/null 2>&1; then
   exit 1
 fi
 
+echo "Trusting the official XcodeBuildMCP Homebrew formula..."
+brew tap getsentry/xcodebuildmcp
+brew trust --formula getsentry/xcodebuildmcp/xcodebuildmcp
+
 echo "Installing missing command-line dependencies..."
 brew bundle install --no-upgrade --file="${brewfile}"
 
@@ -65,6 +69,9 @@ link_config "${repo_dir}/configs/herdr/config.toml" "${config_root}/herdr/config
 
 echo "Linking managed agent skills..."
 "${repo_dir}/scripts/update-skills.sh"
+
+echo "Registering managed MCP servers..."
+"${repo_dir}/scripts/update-mcps.sh"
 
 echo "Starting the Herdr background service..."
 brew services start herdr
