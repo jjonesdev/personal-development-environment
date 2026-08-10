@@ -63,6 +63,9 @@ link_config "${repo_dir}/configs/tuicr/config.toml" "${config_root}/tuicr/config
 link_config "${repo_dir}/configs/gh-dash/config.yml" "${config_root}/gh-dash/config.yml"
 link_config "${repo_dir}/configs/herdr/config.toml" "${config_root}/herdr/config.toml"
 
+echo "Linking managed agent skills..."
+"${repo_dir}/scripts/update-skills.sh"
+
 echo "Starting the Herdr background service..."
 brew services start herdr
 

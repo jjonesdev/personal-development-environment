@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Like Me"
+  short_description: "Draft messages in my preferred personal voice"
+  default_prompt: "Use $jj-write-like-me to rewrite this message in my voice."

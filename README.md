@@ -72,6 +72,7 @@ The installer:
 - installs `pymobiledevice3` with `pipx` when it is missing
 - safely backs up existing configuration paths before replacing them
 - links Neovim, LazyGit, TUICR, `gh-dash`, and Herdr to their tracked configurations
+- links shared agent skills into the personal Codex and Claude Code skill directories
 - starts the Herdr session server at login through Homebrew services
 - installs the pinned Neovim plugins
 
@@ -95,6 +96,11 @@ git -C ~/Developer/personal-development-environment pull --ff-only
 .
 ├── Brewfile
 ├── install.sh
+├── scripts/
+│   └── update-skills.sh
+├── skills/
+│   └── <skill-name>/
+│       └── SKILL.md
 ├── nvim/
 │   ├── init.lua
 │   ├── lua/
@@ -108,9 +114,9 @@ git -C ~/Developer/personal-development-environment pull --ff-only
 ```
 
 The boundaries are intentional: `nvim/` contains editor behavior, `configs/`
-contains settings for standalone tools, and `install.sh` owns package
-installation, backups, and symlinks. Neovim can launch LazyGit and TUICR
-without owning their configuration.
+contains settings for standalone tools, `skills/` contains tool-neutral agent
+skills, and the scripts own installation and symlinks. Neovim can launch
+LazyGit and TUICR without owning their configuration.
 
 The installer manages these paths:
 
@@ -119,6 +125,43 @@ The installer manages these paths:
 - `~/.config/tuicr/config.toml` → `configs/tuicr/config.toml`
 - `~/.config/gh-dash/config.yml` → `configs/gh-dash/config.yml`
 - `~/.config/herdr/config.toml` → `configs/herdr/config.toml`
+- `~/.agents/skills/<skill-name>` → `skills/<skill-name>` for Codex
+- `${CLAUDE_CONFIG_DIR:-~/.claude}/skills/<skill-name>` → `skills/<skill-name>` for Claude Code
+
+## Agent Skills
+
+The repository uses one source directory for skills shared by Codex and Claude
+Code. Both tools support the open Agent Skills format and follow symlinked skill
+directories. The updater links skills individually, so it preserves skills
+installed by other tools or managed outside this repository.
+
+To add a skill:
+
+```bash
+mkdir -p skills/my-skill
+$EDITOR skills/my-skill/SKILL.md
+./scripts/update-skills.sh
+```
+
+Each `SKILL.md` should use portable Agent Skills frontmatter with at least a
+`name` and `description`. Avoid tool-specific extensions when the skill should
+behave the same in both agents. See the official [Codex skill
+documentation](https://developers.openai.com/codex/build-skills) and [Claude
+Code skill documentation](https://code.claude.com/docs/en/slash-commands).
+
+Changes to an already linked skill are available immediately because both
+tools read the repository directory through the symlink. Run
+`scripts/update-skills.sh` again after adding a new skill or repairing a link.
+The updater is strictly additive: it never replaces or deletes an existing
+skill or skills directory. If a skill name already exists with a different
+source, that skill is left untouched and the managed copy is skipped.
+
+Because this repository is public, keep private or work-specific skills out of
+Git. To use a local-only skill from the same directory, exclude it locally:
+
+```bash
+printf 'skills/work-only/\n' >> .git/info/exclude
+```
 
 ## Standalone Tools
 
