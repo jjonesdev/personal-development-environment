@@ -196,6 +196,11 @@ The included iOS skill bundle comes from
 Its debugger skill uses XcodeBuildMCP, while its SwiftUI skills cover Liquid
 Glass, performance auditing, UI patterns, and view refactoring.
 
+The repository also includes Antoine van der Lee's
+[`swift-concurrency`](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill/tree/main/skills/swift-concurrency)
+skill for diagnosing data races, adopting async/await and actors, and guiding
+Swift 6 migrations.
+
 ## Standalone Tools
 
 - `gh dash` opens the GitHub dashboard.

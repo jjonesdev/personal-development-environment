@@ -39,3 +39,8 @@ plugin at commit `c33798c8a1e6da61a75e06e33ceae39a35f05ea5`:
 
 Their internal references are retained. `ios-debugger-agent` is updated for the
 current XcodeBuildMCP v2 tool names and automatic runtime-log capture behavior.
+
+`swift-concurrency` is sourced from
+[`AvdLee/Swift-Concurrency-Agent-Skill`](https://github.com/AvdLee/Swift-Concurrency-Agent-Skill/tree/main/skills/swift-concurrency)
+at commit `fb029722db774588743e685d5474a7da04ffc515`. It is distributed
+under the MIT License; its license notice is retained inside the skill.
