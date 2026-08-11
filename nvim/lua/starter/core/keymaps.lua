@@ -51,6 +51,16 @@ keymap.set("n", "<leader>bx", "<cmd>%bd|e#|bd#<CR>", { desc = "Close all buffers
 -- copy & paste
 keymap.set("x", "p", '"_dP')
 keymap.set("x", "Y", "y$", { desc = "Yank to end of line" })
+keymap.set("n", "<leader>yp", function()
+  local path = vim.fn.expand("%:p")
+  if path == "" then
+    vim.notify("Current buffer has no file path", vim.log.levels.WARN)
+    return
+  end
+
+  vim.fn.setreg("+", path)
+  vim.notify("Yanked file path: " .. path)
+end, { desc = "Yank file path" })
 keymap.set("", "<leader>DD", '"_dd', { desc = "Delete without changing register" })
 
 -- scrolling
