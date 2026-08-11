@@ -293,8 +293,13 @@ The original shorter bindings remain available.
 ### Git
 
 - `<leader>gg` — open LazyGit
+- `<leader>gp` — preview the Git change under the cursor
 - `<leader>gr` — review uncommitted changes in TUICR
 - `<leader>gs` — show changed files in Telescope
+- `[c` / `]c` — jump to the previous or next Git change in the current file
+
+Added, changed, deleted, and untracked lines are marked in the sign column with
+`+`, `~`, deletion markers, and `┆` respectively.
 
 LazyGit uses Delta for syntax-highlighted diff previews when Delta is installed.
 Press `c` to start a normal commit, then `Ctrl-g` to submit its message; press
