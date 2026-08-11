@@ -16,7 +16,13 @@ return {
     keymap.set(
       "n",
       "<leader>ff",
-      "<cmd>Telescope find_files theme=dropdown previewer=false<cr>",
+      function()
+        require("telescope.builtin").find_files({
+          theme = "dropdown",
+          previewer = false,
+          path_display = { "tail" },
+        })
+      end,
       { desc = "Fuzzy find files in cwd" }
     )
     keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live grep in cwd" })
