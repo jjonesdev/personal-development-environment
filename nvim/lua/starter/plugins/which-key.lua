@@ -15,6 +15,7 @@ return {
       { "<leader>s", group = "Splits" },
       { "<leader>t", group = "Tabs & trouble" },
       { "<leader>x", group = "All Xcode Actions" },
+      { "<leader>y", group = "Yank" },
       { "<leader>xD", group = "Debugging" },
       { "<leader>xn", group = "Navigation" },
       { "<leader>xm", group = "Tools" },
@@ -68,6 +69,7 @@ return {
       { "<leader>mm", desc = "Show Neovim messages" },
       { "<leader>mv", desc = "Toggle Markdown view" },
       { "<leader>w", desc = "Save all changes" },
+      { "<leader>yp", desc = "Yank file path" },
     },
   },
   keys = {

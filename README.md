@@ -331,6 +331,7 @@ debug session is active.
 - `<leader>mm` — show Neovim messages
 - `<leader>mv` — toggle the rendered Markdown view
 - `<leader>w` — save all changes
+- `<leader>yp` — yank the current file's absolute path to the system clipboard
 
 Neovim uses the system clipboard as its default register, so regular yank,
 delete, and paste operations interoperate with macOS copy and paste.
