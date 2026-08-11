@@ -28,6 +28,21 @@ link_config() {
   echo "Linked ${target_path} -> ${source_path}."
 }
 
+prompt_yes_no() {
+  local prompt="$1"
+  local reply
+
+  while true; do
+    read -r -p "${prompt} [y/N] " reply || reply=""
+
+    case "${reply}" in
+      [yY] | [yY][eE][sS]) return 0 ;;
+      "" | [nN] | [nN][oO]) return 1 ;;
+      *) echo "Please answer yes or no." ;;
+    esac
+  done
+}
+
 if ! command -v brew >/dev/null 2>&1; then
   echo "Homebrew is required. Install it from https://brew.sh and rerun this script." >&2
   exit 1
@@ -45,11 +60,19 @@ brew trust --formula getsentry/xcodebuildmcp/xcodebuildmcp
 echo "Installing missing command-line dependencies..."
 brew bundle install --no-upgrade --file="${brewfile}"
 
-if pipx list --short | awk '{ print $1 }' | grep -qx "pymobiledevice3"; then
+if command -v pipx >/dev/null 2>&1 \
+  && pipx list --short | awk '{ print $1 }' | grep -qx "pymobiledevice3"; then
   echo "pymobiledevice3 is already installed."
-else
+elif prompt_yes_no "Install pymobiledevice3 for physical-device workflows?"; then
+  if ! command -v pipx >/dev/null 2>&1; then
+    echo "Installing pipx (required by pymobiledevice3)..."
+    brew install pipx
+  fi
+
   echo "Installing pymobiledevice3..."
   pipx install pymobiledevice3
+else
+  echo "Skipping optional pymobiledevice3 setup."
 fi
 
 if gh extension list | grep -qE '(^|[[:space:]])dlvhdr/gh-dash([[:space:]]|$)'; then

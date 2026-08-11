@@ -32,7 +32,7 @@ contributions. Fork it if you want to adapt it for your own workflow.
 - [XcodeProjectCLI](https://github.com/wojciech-kulik/XcodeProjectCLI)
 - [XcodeBuildMCP](https://github.com/getsentry/XcodeBuildMCP) for agent-driven builds, tests, debugging, logs, and simulator automation
 - [xcode-build-server](https://github.com/SolaWing/xcode-build-server)
-- [pymobiledevice3](https://github.com/doronz88/pymobiledevice3) for physical-device workflows
+- [pymobiledevice3](https://github.com/doronz88/pymobiledevice3) for physical-device workflows (optional; the installer prompts before installing it)
 - [SwiftLint](https://github.com/realm/SwiftLint)
 - [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
 - [xcbeautify](https://github.com/cpisciotta/xcbeautify)
@@ -40,17 +40,23 @@ contributions. Fork it if you want to adapt it for your own workflow.
 - [Delta](https://github.com/dandavison/delta)
 - [TUICR](https://github.com/agavra/tuicr)
 
-The included installer handles the Homebrew and `pipx` dependencies. To install
-them manually instead:
+The included installer handles the Homebrew dependencies and can optionally
+install `pymobiledevice3` with `pipx`. To install the base tools manually instead:
 
 ```bash
 brew tap getsentry/xcodebuildmcp
 brew trust --formula getsentry/xcodebuildmcp/xcodebuildmcp
 brew install neovim gh xcp xcode-build-server xcodebuildmcp xcbeautify swiftformat swiftlint lazygit git-delta tuicr herdr \
-  pipx ripgrep fd jq coreutils
+  ripgrep fd jq coreutils
 gh extension install dlvhdr/gh-dash
-pipx install pymobiledevice3
 brew services start herdr
+```
+
+For optional physical-device support:
+
+```bash
+brew install pipx
+pipx install pymobiledevice3
 ```
 
 The interface was designed with **Lilex Nerd Font Mono Medium**. Any Nerd Font
@@ -73,7 +79,7 @@ The installer:
 - installs missing formulae from `Brewfile` without upgrading existing ones
 - trusts only the official XcodeBuildMCP formula from its third-party Homebrew tap
 - installs `gh-dash` as a GitHub CLI extension when it is missing
-- installs `pymobiledevice3` with `pipx` when it is missing
+- prompts to install `pymobiledevice3` and its `pipx` dependency when they are missing
 - safely backs up existing configuration paths before replacing them
 - links Neovim, LazyGit, TUICR, `gh-dash`, and Herdr to their tracked configurations
 - links shared agent skills into the personal Codex and Claude Code skill directories
