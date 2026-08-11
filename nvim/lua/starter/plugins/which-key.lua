@@ -39,6 +39,7 @@ return {
 
       -- Git
       { "<leader>gg", desc = "Open LazyGit" },
+      { "<leader>gp", desc = "Preview Git change" },
       { "<leader>gr", desc = "Review working tree" },
       { "<leader>gs", desc = "Show changed files" },
 
