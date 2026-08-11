@@ -17,11 +17,12 @@ return {
       "n",
       "<leader>ff",
       function()
-        require("telescope.builtin").find_files({
-          theme = "dropdown",
+        local dropdown = require("telescope.themes").get_dropdown({
           previewer = false,
           path_display = { "tail" },
         })
+
+        require("telescope.builtin").find_files(dropdown)
       end,
       { desc = "Fuzzy find files in cwd" }
     )
