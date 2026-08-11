@@ -9,6 +9,7 @@ return {
       { "<leader>d", group = "Debug & diagnostics" },
       { "<leader>f", group = "Find" },
       { "<leader>g", group = "Git" },
+      { "<leader>h", group = "Harpoon" },
       { "<leader>l", group = "Lazy" },
       { "<leader>m", group = "Tools & messages" },
       { "<leader>s", group = "Splits" },
@@ -38,6 +39,15 @@ return {
       -- Git
       { "<leader>gg", desc = "Open LazyGit" },
       { "<leader>gr", desc = "Review working tree" },
+      { "<leader>gs", desc = "Show changed files" },
+
+      -- Harpoon
+      { "<leader>ha", desc = "Add file to Harpoon" },
+      { "<leader>hh", desc = "Open Harpoon menu" },
+      { "<leader>h1", desc = "Open Harpoon file 1" },
+      { "<leader>h2", desc = "Open Harpoon file 2" },
+      { "<leader>h3", desc = "Open Harpoon file 3" },
+      { "<leader>h4", desc = "Open Harpoon file 4" },
 
       -- Debugging
       { "<leader>b", desc = "Toggle breakpoint" },
@@ -56,6 +66,7 @@ return {
       { "<leader>mp", desc = "Format buffer or selection", mode = { "n", "v" } },
       { "<leader>ml", desc = "Lint buffer" },
       { "<leader>mm", desc = "Show Neovim messages" },
+      { "<leader>mv", desc = "Toggle Markdown view" },
       { "<leader>w", desc = "Save all changes" },
     },
   },

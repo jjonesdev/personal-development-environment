@@ -294,8 +294,12 @@ The original shorter bindings remain available.
 
 - `<leader>gg` — open LazyGit
 - `<leader>gr` — review uncommitted changes in TUICR
+- `<leader>gs` — show changed files in Telescope
 
 LazyGit uses Delta for syntax-highlighted diff previews when Delta is installed.
+Press `c` to start a normal commit, then `Ctrl-g` to submit its message; press
+`w` to commit without running Git hooks. Neither commit path uses Herdr's
+`Ctrl-s` prefix, and `Ctrl-g` works through nested terminal sessions.
 In TUICR, press `c` to leave a line-level comment or `y` to copy the complete,
 structured review for an agent.
 
@@ -317,11 +321,19 @@ debug session is active.
 - `<leader>e` — toggle the file tree
 - `<leader>ff` — find files
 - `<leader>fg` — live grep
+- `<leader>ha` — add the current file to Harpoon
+- `<leader>hh` — open the Harpoon menu
+- `<leader>h1` through `<leader>h4` — open a Harpoon file directly
+- `[h` / `]h` — open the previous or next Harpoon file
 - `<leader>tt` — toggle Trouble/quickfix results
 - `<leader>mp` — format the current buffer or visual selection
 - `<leader>ml` — lint the current buffer
 - `<leader>mm` — show Neovim messages
+- `<leader>mv` — toggle the rendered Markdown view
 - `<leader>w` — save all changes
+
+Neovim uses the system clipboard as its default register, so regular yank,
+delete, and paste operations interoperate with macOS copy and paste.
 
 ## Formatting and Linting
 
