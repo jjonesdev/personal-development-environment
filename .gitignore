@@ -40,3 +40,6 @@ luac.out
 *.hex
 
 .DS_Store
+
+# Neovim runtime log
+/nvim.log
