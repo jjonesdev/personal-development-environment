@@ -1,0 +1,6 @@
+interface:
+  display_name: "JJ iOS Tech Spec"
+  short_description: "Write typed iOS architecture handoffs"
+  default_prompt: "Use $jj-ios-tech-spec to write a typed iOS call-stack architecture handoff."
+policy:
+  allow_implicit_invocation: false
