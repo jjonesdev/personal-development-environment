@@ -8,6 +8,24 @@ return {
 
     telescope.setup({
       ensure_installed = { "swift" },
+      pickers = {
+        live_grep = {
+          path_display = { "tail" },
+          layout_config = {
+            horizontal = {
+              preview_width = 0.6,
+            },
+          },
+        },
+        git_status = {
+          path_display = { "tail" },
+          layout_config = {
+            horizontal = {
+              preview_width = 0.6,
+            },
+          },
+        },
+      },
     })
 
     -- set keymaps
